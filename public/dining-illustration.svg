@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400">
+  <title>Dining Illustration</title>
+  
+  <!-- Table -->
+  <rect x="100" y="250" width="300" height="20" fill="#8B4513"/>
+  
+  <!-- Plates -->
+  <circle cx="200" cy="200" r="40" fill="#F5F5F5" stroke="#000" stroke-width="2"/>
+  <circle cx="300" cy="200" r="40" fill="#F5F5F5" stroke="#000" stroke-width="2"/>
+  
+  <!-- Utensils -->
+  <path d="M180,180 L220,220" stroke="#000" stroke-width="3"/>
+  <path d="M320,180 L280,220" stroke="#000" stroke-width="3"/>
+  
+  <!-- Wine Glass -->
+  <path d="M250,150 L260,200 L240,200 Z" fill="#87CEEB"/>
+  
+  <!-- Decorative Elements -->
+  <text x="250" y="50" text-anchor="middle" font-size="24" fill="#1890ff">TableEase</text>
+</svg>

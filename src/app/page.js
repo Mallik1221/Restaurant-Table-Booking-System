@@ -1,101 +1,365 @@
-import Image from "next/image";
+"use client"
+import React, { useState } from 'react';
+import { 
+  Layout, 
+  Typography, 
+  Button, 
+  Row, 
+  Col, 
+  Card, 
+  Carousel, 
+  Space, 
+  Steps,
+  Tag
+} from 'antd';
+import Image from 'next/image';
+import { 
+  BookOutlined, 
+  RestOutlined, 
+  StarOutlined, 
+  NotificationOutlined,
+  SearchOutlined,
+  CheckCircleOutlined
+} from '@ant-design/icons';
+import LoginModal from '../components/LoginModal';
+import SignUpModal from '../components/SignUpModal';
+
+const { Header, Content } = Layout;
+const { Title, Paragraph, Text } = Typography;
+const { Step } = Steps;
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see.</li>
-        </ol>
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleOpenSignUp = () => {
+    setShowLoginModal(false);
+    setShowSignUpModal(true);
+  };
+
+  const handleOpenLogin = () => {
+    setShowSignUpModal(false);
+    setShowLoginModal(true);
+  };
+
+  const contentStyle = {
+    height: '400px',
+    color: '#fff',
+    lineHeight: '200px',
+    textAlign: 'center',
+    background: '#f0f2f5',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  };
+
+  return (
+    <Layout>
+      {/* Header */}
+      <Header 
+        style={{ 
+          background: 'linear-gradient(to right, #1890ff, #40a9ff)', 
+          padding: '0 50px', 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center' 
+        }}
+      >
+        <div>
+          <Title level={3} style={{ color: 'white', margin: 0 }}>
+            TableEase
+          </Title>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Space>
+          <Button 
+            type="text" 
+            style={{ color: 'white' }}
+            onClick={() => setShowLoginModal(true)}
+          >
+            Login
+          </Button>
+          <Button 
+            type="primary" 
+            ghost 
+            style={{ color: 'white', borderColor: 'white' }}
+            onClick={() => setShowSignUpModal(true)}
+          >
+            Sign Up
+          </Button>
+        </Space>
+      </Header>
+
+      {/* <Content style={{ padding: '50px' }}> */}
+      <Content>
+        {/* Hero Section */}
+        <Row 
+          align="middle" 
+          justify="center" 
+          style={{ 
+            minHeight: '500px', 
+            background: 'linear-gradient(to right, #e6f2ff, #ffffff)' 
+          }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <Col span={10}>
+            <Title level={1} style={{ color: '#1890ff' }}>
+              No Wait, Just Taste
+            </Title>
+            <Paragraph style={{ fontSize: '18px', color: '#666' }}>
+              Book your perfect dining experience in seconds. Discover, reserve, and enjoy without the hassle.
+            </Paragraph>
+            <Space>
+              <Button 
+                type="primary" 
+                size="large" 
+                icon={<BookOutlined />}
+                onClick={() => setShowLoginModal(true)}
+              >
+                Reserve Your Table
+              </Button>
+            </Space>
+          </Col>
+          {/* <Col span={10}>
+            <img 
+              src="/dining-illustration.svg" 
+              alt="Dining Illustration" 
+              style={{ maxWidth: '100%' }} 
+            />
+          </Col> */}
+          
+          <Col xs={24} md={12}>
+            <Carousel autoplay>
+              <div>
+                <div style={contentStyle}>
+                  <Image 
+                    src="/Dining-homepage/food1.jpg" 
+                    alt="Dining Illustration 1" 
+                    width={900} 
+                    height={300}
+                  />
+                </div>
+              </div>
+              <div>
+                <div style={contentStyle}>
+                  <Image 
+                    src="/Dining-homepage/food2.jpg" 
+                    alt="Dining Illustration 2" 
+                    width={900} 
+                    height={300}
+                  />
+                </div>
+              </div>
+              <div>
+                <div style={contentStyle}>
+                  <Image 
+                    src="/Dining-homepage/rest02.jpg" 
+                    alt="Dining Illustration 3" 
+                    width={900} 
+                    height={300}
+                  />
+                </div>
+              </div>
+            </Carousel>
+          </Col>
+        </Row>
+
+        {/* Features Section */}
+        <Row 
+          justify="center" 
+          style={{ 
+            padding: '50px 0', 
+            background: '#f0f2f5' 
+          }}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <Col span={20}>
+            <Title level={2} style={{ textAlign: 'center', marginBottom: '30px' }}>
+              Why Choose TableEase?
+            </Title>
+            <Row gutter={16}>
+              <Col span={8}>
+                <Card 
+                  hoverable 
+                  style={{ textAlign: 'center' }}
+                  cover={<StarOutlined style={{ fontSize: '64px', color: '#1890ff', margin: '20px 0' }} />}
+                >
+                  <Card.Meta 
+                    title="Instant Reservations" 
+                    description="Secure your table with just a few taps" 
+                  />
+                </Card>
+              </Col>
+              <Col span={8}>
+                <Card 
+                  hoverable 
+                  style={{ textAlign: 'center' }}
+                  cover={<RestOutlined style={{ fontSize: '64px', color: '#1890ff', margin: '20px 0' }} />}
+                >
+                  <Card.Meta 
+                    title="Explore Restaurants" 
+                    description="Discover new cuisines and hidden gems" 
+                  />
+                </Card>
+              </Col>
+              <Col span={8}>
+                <Card 
+                  hoverable 
+                  style={{ textAlign: 'center' }}
+                  cover={<NotificationOutlined style={{ fontSize: '64px', color: '#1890ff', margin: '20px 0' }} />}
+                >
+                  <Card.Meta 
+                    title="Stay Updated" 
+                    description="Get real-time alerts and exclusive offers" 
+                  />
+                </Card>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+
+        {/* How It Works */}
+        <Row 
+          justify="center" 
+          style={{ 
+            padding: '50px 0', 
+            background: 'white' 
+          }}
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <Col span={20}>
+            <Title level={2} style={{ textAlign: 'center', marginBottom: '30px' }}>
+              How It Works
+            </Title>
+            <Steps current={-1}>
+              <Step 
+                title="Find" 
+                description="Search by cuisine, location, or restaurant name" 
+                icon={<SearchOutlined />} 
+              />
+              <Step 
+                title="Reserve" 
+                description="Select time, guests, and confirm booking" 
+                icon={<BookOutlined />} 
+              />
+              <Step 
+                title="Enjoy" 
+                description="Arrive at your reserved time and dine stress-free" 
+                icon={<CheckCircleOutlined />} 
+              />
+            </Steps>
+          </Col>
+        </Row>
+
+        {/* Special Offers */}
+        <Row 
+          justify="center" 
+          style={{ 
+            padding: '50px 0', 
+            background: '#f0f2f5' 
+          }}
+        >
+          <Col span={20}>
+            <Title level={2} style={{ textAlign: 'center', marginBottom: '30px' }}>
+              Special Offers
+            </Title>
+            <Row gutter={16}>
+              <Col span={12}>
+                <Card>
+                  <Title level={4}>🥂 Weekend Exclusive</Title>
+                  <Paragraph>Book a table on weekends and enjoy a complimentary drink</Paragraph>
+                  <Tag color="blue">Limited Time Offer</Tag>
+                </Card>
+              </Col>
+              <Col span={12}>
+                <Card>
+                  <Title level={4}>🎉 Group Dining Discount</Title>
+                  <Paragraph>Get 10% off for bookings of 6 or more guests</Paragraph>
+                  <Tag color="green">Save Now</Tag>
+                </Card>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+
+        {/* Testimonials */}
+        <Row 
+          justify="center" 
+          style={{ 
+            padding: '50px 0', 
+            background: 'white' 
+          }}
+        >
+          <Col span={20}>
+            <Title level={2} style={{ textAlign: 'center', marginBottom: '30px' }}>
+              What Our Customers Say
+            </Title>
+            <Carousel autoplay>
+              <div>
+                <Card>
+                  <Paragraph italic>
+                    "I've never had such a smooth dining experience. Booking a table was super easy, and we had the best time!"
+                  </Paragraph>
+                  <Text strong>- Priya R.</Text>
+                </Card>
+              </div>
+              <div>
+                <Card>
+                  <Paragraph italic>
+                    "The app helped us discover some hidden gems in our city. Love it!"
+                  </Paragraph>
+                  <Text strong>- John D.</Text>
+                </Card>
+              </div>
+            </Carousel>
+          </Col>
+        </Row>
+
+        {/* Call to Action */}
+        <Row 
+          justify="center" 
+          align="middle" 
+          style={{ 
+            padding: '50px 0', 
+            background: '#1890ff', 
+            color: 'white', 
+            textAlign: 'center' 
+          }}
+        >
+          <Col span={20}>
+            <Title level={2} style={{ color: 'white' }}>
+              Ready to Elevate Your Dining Experience?
+            </Title>
+            <Paragraph style={{ color: 'white', fontSize: '18px' }}>
+              Join thousands of happy diners. Sign up now and book your table today!
+            </Paragraph>
+            <Button 
+              type="primary" 
+              size="large" 
+              style={{ 
+                background: 'white', 
+                color: '#1890ff', 
+                fontWeight: 'bold' 
+              }}
+              onClick={() => setShowSignUpModal(true)}
+            >
+              Create Your Account
+            </Button>
+          </Col>
+        </Row>
+      </Content>
+
+      {/* Login Modal */}
+      <LoginModal 
+        open={showLoginModal} 
+        onClose={() => setShowLoginModal(false)}
+        onSignUpClick={handleOpenSignUp}
+
+        
+      />
+
+      {/* Sign Up Modal */}
+      <SignUpModal 
+        open={showSignUpModal} 
+        onClose={() => setShowSignUpModal(false)}
+        onLoginClick={handleOpenLogin}
+      />
+    </Layout>
   );
-}
+} 
